@@ -13,7 +13,7 @@ const ProductUpdateForm = ({
   subOptions,
   arrayOfSubs,
   setArrayOfSubs,
-  selectedCategory
+  selectedCategory,
 }) => {
   // destructure
   const {

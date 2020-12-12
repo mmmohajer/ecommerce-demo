@@ -3,7 +3,7 @@ import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../../functions/category";
-import { createSub, getSub, removeSub, getSubs} from "../../../functions/sub";
+import { createSub, getSub, removeSub, getSubs } from "../../../functions/sub";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
@@ -14,8 +14,8 @@ const SubCreate = () => {
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState("");
   const [subs, setSubs] = useState([]);
   // step 1
   const [keyword, setKeyword] = useState("");
@@ -28,8 +28,7 @@ const SubCreate = () => {
   const loadCategories = () =>
     getCategories().then((c) => setCategories(c.data));
 
-  const loadSubs = () =>
-    getSubs().then((s) => setSubs(s.data));
+  const loadSubs = () => getSubs().then((s) => setSubs(s.data));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +58,7 @@ const SubCreate = () => {
         .then((res) => {
           setLoading(false);
           toast.error(`${res.data.name} deleted`);
-          loadSubs()
+          loadSubs();
         })
         .catch((err) => {
           if (err.response.status === 400) {
@@ -87,19 +86,20 @@ const SubCreate = () => {
           )}
 
           <div className="form-group">
-          	<label>Parent category</label>
-          		<select 
-          			name="category" 
-          			className="form-control" 
-          			onChange={(e) => setCategory(e.target.value)}
-          		>
-          			<option>Please select</option>
-          			{categories.length > 0 && categories.map((c) => {
-          				return(
-          					<option key={c._id} value={c._id}>{c.name}</option>
-          				)
-          			})}
-          		</select>
+            <label>Parent category</label>
+            <select
+              name="category"
+              className="form-control"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option>Please select</option>
+              {categories.length > 0 &&
+                categories.map((c) => (
+                  <option key={c._id} value={c._id}>
+                    {c.name}
+                  </option>
+                ))}
+            </select>
           </div>
 
           <CategoryForm

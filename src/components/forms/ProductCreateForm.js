@@ -1,16 +1,16 @@
 import React from "react";
-import { Select } from 'antd';
+import { Select } from "antd";
 
 const { Option } = Select;
 
 const ProductCreateForm = ({
   handleSubmit,
   handleChange,
+  setValues,
   values,
   handleCatagoryChange,
   subOptions,
   showSub,
-  setValues
 }) => {
   // destructure
   const {
@@ -129,17 +129,17 @@ const ProductCreateForm = ({
         </select>
       </div>
 
-      {showSub &&
+      {showSub && (
         <div>
           <label>Sub Categories</label>
           <Select
             mode="multiple"
-            style={{width: '100%'}}
-            value={subs}
+            style={{ width: "100%" }}
             placeholder="Please select"
-            onChange={(value) => setValues({...values, subs:value})}
+            value={subs}
+            onChange={(value) => setValues({ ...values, subs: value })}
           >
-            {subOptions.length && 
+            {subOptions.length &&
               subOptions.map((s) => (
                 <Option key={s._id} value={s._id}>
                   {s.name}
@@ -147,10 +147,9 @@ const ProductCreateForm = ({
               ))}
           </Select>
         </div>
-      }
+      )}
 
       <br />
-
       <button className="btn btn-outline-info">Save</button>
     </form>
   );

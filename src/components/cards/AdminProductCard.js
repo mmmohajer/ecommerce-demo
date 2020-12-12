@@ -1,9 +1,8 @@
 import React from "react";
 import { Card } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import {Link} from 'react-router-dom';
-
 import laptop from "../../images/laptop.png";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 

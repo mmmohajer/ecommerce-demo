@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {Pagination} from "antd";
-
 import { getProducts, getProductsCount } from "../../functions/product";
 import ProductCard from "../cards/ProductCard";
 import LoadingCard from "../cards/LoadingCard";
+import { Pagination } from "antd";
 
 const NewArrivals = () => {
   const [products, setProducts] = useState([]);
@@ -16,12 +15,13 @@ const NewArrivals = () => {
   }, [page]);
 
   useEffect(() => {
-  	getProductsCount().then(res => setProductsCount(res.data));
-  }, [])
+    getProductsCount().then((res) => setProductsCount(res.data));
+  }, []);
 
   const loadAllProducts = () => {
     setLoading(true);
-    getProducts('createdAt', 'desc', page).then((res) => {
+    // sort, order, limit
+    getProducts("createdAt", "desc", page).then((res) => {
       setProducts(res.data);
       setLoading(false);
     });
@@ -44,13 +44,13 @@ const NewArrivals = () => {
       </div>
 
       <div className="row">
-      	<nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
-      		<Pagination 
-      			current={page} 
-      			total={(productsCount / 3) * 10} 
-      			onChange={(value) => setPage(value)}
-      		/>
-      	</nav>
+        <nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
+          <Pagination
+            current={page}
+            total={(productsCount / 3) * 10}
+            onChange={(value) => setPage(value)}
+          />
+        </nav>
       </div>
     </>
   );
